@@ -3,7 +3,6 @@
 import * as vscode from 'vscode';
 import { v4 as uuidv4 } from 'uuid';
 import * as Constants from './constants';
-import { copy } from './clipboard';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -29,37 +28,31 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() { }
 
 function generateUuid(cmd:string, editor: vscode.TextEditor | undefined) {
-  if (editor === undefined || editor.selection === undefined) {
-    copyUuid(uuidv4());
-    return;
-  }
-
-  let uuid:string = uuidv4();
-
+  let uuid:string = decideSnippet(cmd);
   editor.edit(editBuilder => {
     for (const selection of editor.selections) {
       editBuilder.replace(selection, uuid);
-      if (cmd === Constants.UUID_GENERATE) {
-        uuid = uuidv4();
-      }
+      uuid = decideSnippet(cmd);
     }
   });
 }
 
-function showMessage(uuid: string) {
-  if (isNullOrWhiteSpace(uuid)) {
-    return;
+function decideSnippet(cmd:string){
+  switch (cmd) {
+    case Constants.UUID_GENERATE_DATACY:
+      return`data-cy="${uuidv4()}" `;
+      break;
+    case Constants.UUID_GENERATE_DATATEST:
+      return `data-test="${uuidv4()}" `;
+      break;
+    case Constants.UUID_GENERATE_DATATESTID:
+      return `data-testid="${uuidv4()}" `;
+      break;
+    case Constants.UUID_GENERATE_ID:
+      return `id="${uuidv4()}" `;
+      break;
+    default:
+      return uuidv4();
+      break;
   }
-
-  vscode.window.showInformationMessage(uuid);
-}
-
-function copyUuid(uuid: string) {
-  copy(uuid, () => {
-    showMessage(uuid + ' is copied.');
-  });
-}
-
-function isNullOrWhiteSpace(text: string | null | undefined) {
-  return typeof text === 'string' && !text.trim() || typeof text === undefined || text === null;
 }

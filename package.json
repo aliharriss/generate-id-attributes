@@ -1,22 +1,22 @@
 {
-  "name": "uuid-generator",
-  "displayName": "UUID Generator",
-  "description": "Generate a UUID",
-  "version": "0.0.4",
+  "name": "test-data-attribute-generator",
+  "displayName": "Cypress Unique Attribute Generator",
+  "description": "Generate a data-cy/data-test/data-testid attributes with a UUID",
+  "version": "0.0.1",
   "license": "MIT",
-  "publisher": "netcorext",
+  "publisher": "scout",
   "author": {
-    "name": "Aren Chen",
-    "email": "gucci313031@gmail.com"
+    "name": "Ali Harris",
+    "email": "aliharriss1995@gmail.com"
   },
-  "homepage": "https://github.com/arenchen/vscode-uuid-generator",
+  "homepage": "https://github.com/aliharriss/generate-id-attributes",
   "icon": "images/icon.png",
   "bugs": {
-    "url": "https://github.com/arenchen/vscode-uuid-generator/issues"
+    "url": "https://github.com/aliharriss/generate-id-attributes/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arenchen/vscode-uuid-generator.git"
+    "url": "https://github.com/aliharriss/generate-id-attributes.git"
   },
   "engines": {
     "vscode": "^1.30.0"
@@ -31,30 +31,50 @@
   ],
   "main": "./out/src/extension.js",
   "activationEvents": [
-    "onCommand:uuid.generate",
-    "onCommand:uuid.duplicate"
+    "onCommand:uuid.generateDataCy",
+    "onCommand:uuid.generateDataTest",
+    "onCommand:uuid.generateDataTestId",
+    "onCommand:uuid.generateId"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "uuid.generate",
-        "title": "Generate a UUID"
+        "command": "uuid.generateDataCy",
+        "title": "Generate a data-cy attribute with a UUID value"
       },
       {
-        "command": "uuid.duplicate",
-        "title": "Duplicate a UUID"
+        "command": "uuid.generateDataTest",
+        "title": "Generate a data-test attribute with a UUID value"
+      },
+      {
+        "command": "uuid.generateDataTestId",
+        "title": "Generate a data-testid attribute with a UUID value"
+      },
+      {
+        "command": "uuid.generateId",
+        "title": "Generate an id attribute with a UUID value"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "when": "editorTextFocus",
-          "command": "uuid.generate",
+          "command": "uuid.generateDataCy",
           "group": "uuid"
         },
         {
-          "when": "editorHasMultipleSelections",
-          "command": "uuid.duplicate",
+          "when": "editorTextFocus",
+          "command": "uuid.generateDataTest",
+          "group": "uuid"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "uuid.generateDataTestId",
+          "group": "uuid"
+        },
+        {
+          "when": "editorTextFocus",
+          "command": "uuid.generateId",
           "group": "uuid"
         }
       ]
