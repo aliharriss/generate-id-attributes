@@ -19,7 +19,7 @@
     "url": "https://github.com/aliharriss/generate-id-attributes.git"
   },
   "engines": {
-    "vscode": "^1.30.0"
+    "vscode": "^1.34.0"
   },
   "categories": [
     "Other",
@@ -81,19 +81,18 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "yarn run compile && node ./node_modules/vscode/bin/test"
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.42",
-    "@types/node": "^8.10.25",
+		"@types/vscode": "^1.34.0",
     "tsc-watch": "^1.1.36",
     "tslint": "^5.8.0",
-    "typescript": "^3.1.4",
-    "vscode": "^1.1.25"
+    "typescript": "^4.2.2",
+    "@types/node": "^12.12.0"
   },
   "dependencies": {
     "@types/uuid": "^3.4.4",
