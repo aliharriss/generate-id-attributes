@@ -5,6 +5,9 @@ See the Cypress [documentation](https://docs.cypress.io/guides/references/best-p
 ## How to use
 ![](images/uuid.gif)
 
+## Source
+[Github](https://github.com/aliharriss/generate-id-attributes)
+
 ## Credit
 Forked from the great uuid generator package by Aren Chen's [VScode extension](https://github.com/arenchen/vscode-uuid-generator)
 

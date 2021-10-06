@@ -1,8 +1,8 @@
 {
-  "name": "test-data-attribute-generator",
+  "name": "cypress-unique-attribute-generator",
   "displayName": "Cypress Unique Attribute Generator",
   "description": "Generate a data-cy/data-test/data-testid attributes with a UUID",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "scout",
   "author": {

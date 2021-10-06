@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
   // The commandId parameter must match the command field in package.json
   for (const cmd of Constants.Commands) {
     context.subscriptions.push(vscode.commands.registerCommand(cmd, (args: any[]) => {
-      const editor = vscode.window.activeTextEditor;
+      const editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
 
       generateUuid(cmd, editor);
     }));
@@ -29,12 +29,14 @@ export function deactivate() { }
 
 function generateUuid(cmd:string, editor: vscode.TextEditor | undefined) {
   let uuid:string = decideSnippet(cmd);
-  editor.edit(editBuilder => {
-    for (const selection of editor.selections) {
-      editBuilder.replace(selection, uuid);
-      uuid = decideSnippet(cmd);
-    }
-  });
+  if (editor) {
+    editor.edit(editBuilder => {
+      for (const selection of editor.selections) {
+        editBuilder.replace(selection, uuid);
+        uuid = decideSnippet(cmd);
+      }
+    });
+  }
 }
 
 function decideSnippet(cmd:string){
